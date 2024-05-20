@@ -1,0 +1,11 @@
+{
+  "DEBUG": "True",
+  "port": 1399,
+  "ip": "192.168.0.110",
+  "m3u8FileSavePath": "D:\\",
+  "pollingTimes": 200,
+  "clearVideoIntervalTime": 200,
+  "hls_time": "1",
+  "hls_list_size": 6,
+  "g": "10"
+}
