@@ -61,7 +61,8 @@ class RTSCapture(cv2.VideoCapture):
     def stop_read(self):
         """退出子线程方法"""
         self._reading = False
-        if self.frame_receiver.is_alive(): self.frame_receiver.join()
+        if self.frame_receiver.is_alive():
+            self.frame_receiver.join()
 
 
 import sys
