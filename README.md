@@ -1,6 +1,6 @@
 ### 修改后端转码配置：./config.json
 
-### 运行后端转码：双击./start_main.vbs
+### 运行后端转码：双击./start_main.vbs (注:mainDir 路径应为该项目的绝对路径)
 
 ### rtsp_urls 文件为需要测试 rtsp 的所有 url
 
