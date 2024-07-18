@@ -2,7 +2,7 @@
   "DEBUG": "True",
   "port": 1399,
   "ip": "127.0.0.1",
-  "m3u8FileSavePath": "D:\\",
+  "m3u8FileSavePath": "G:\\video_convert",
   "pollingTimes": 200,
   "clearVideoIntervalTime": 200,
   "hls_time": "1",

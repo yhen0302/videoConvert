@@ -2,7 +2,7 @@ Dim ws, fso, logFile, logContent, mainDir, mainPath
 Set ws = WScript.CreateObject("WScript.Shell")
 Set fso = CreateObject("Scripting.FileSystemObject")
 
-mainDir = "dist\main"
+mainDir = "\dist\main"
 
 mainPath = mainDir & "\main.exe"
 logFile = mainDir & "\mainLog.txt"
