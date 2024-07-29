@@ -38,12 +38,13 @@ onMounted(() => {
         .then((res) => {
           console.log("res: ", res);
           if (res.code == 200) {
-            player.src = res.data.url;
+	    const url = res.data.url.replace("192.168.240.2", "intellisafety.cn")
+            player.src = url;
             player.play();
             window.preUrl = video.url;
             curVideoName.value = video.name;
             curRtspUrl.value = video.url;
-            curHlsUrl.value = res.data.url;
+            curHlsUrl.value = url;
             isLoding.value = false;
           } else if (res.code == 401) {
             curRtspUrl.value = "视频转码失败";

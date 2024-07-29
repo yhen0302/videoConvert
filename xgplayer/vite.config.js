@@ -16,8 +16,8 @@ export default defineConfig({
   },
   server: {
     host: "0.0.0.0",
-    port: 5173,
-    open: true,
+    port: 1400,
+    open: false,
     // 代理
     proxy: {
       "/api": {

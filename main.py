@@ -65,15 +65,18 @@ def periodic_cleanup():
 def run_ffmpeg_command(rtsp_url, m3u8_file_path):
     if not os.path.exists(os.path.dirname(m3u8_file_path)):
         os.makedirs(os.path.dirname(m3u8_file_path))
-    ffmpeg_command = [
-        "ffmpeg",
-        "-i", rtsp_url,
-        "-c:v", "copy",
-        "-g", g,
-        "-hls_time", hls_time,
-        "-hls_list_size", hls_list_size,
-        m3u8_file_path
+    ffmpeg_command = [ 
+        "ffmpeg", "-i",
+        rtsp_url, 
+        "-c:v", "libx264",
+        "-g", str(g),
+        "-hls_time", str(hls_time),
+        "-hls_list_size", str(hls_list_size),
+        "-f", "hls", 
+        m3u8_file_path 
     ]
+
+
     print(" ".join(ffmpeg_command))
     ffmpeg_processes[rtsp_url] = subprocess.Popen(ffmpeg_command)
 
@@ -89,7 +92,7 @@ def check_video_transfer(rtsp_url):
     return True
 
 
-@app.route('/hls', methods=['POST'])
+@app.route('/videoConvert/hls', methods=['POST'])
 def hls():
     rtsp_url = request.form.get("rtsp_url")
     if rtsp_url is None:
@@ -157,12 +160,12 @@ def hls():
     return Response.__fail__(msg=msg)
 
 
-@app.route('/getValidRtspUrl', methods=["GET"])
+@app.route('/videoConvert/getValidRtspUrl', methods=["GET"])
 def getValidRtspUrl():
     return Response.__success__(data={"valid_rtsp_url": valid_rtsp_url})
 
 
-@app.route('/getNotValidRtspUrl', methods=["GET"])
+@app.route('/videoConvert/getNotValidRtspUrl', methods=["GET"])
 def getNotValidRtspUrl():
     return Response.__success__(data={"not_valid_rtsp_url": not_valid_rtsp_url})
 
@@ -185,7 +188,7 @@ def remove_file(file_path):
     os.remove(file_path)
 
 
-@app.route('/stop', methods=['POST'])
+@app.route('/videoConvert/stop', methods=['POST'])
 def stop():
     rtsp_url = request.form.get("rtsp_url")
     if rtsp_url is None:
@@ -193,7 +196,7 @@ def stop():
     return stop_stream(rtsp_url)
 
 
-@app.route('/stopAll', methods=['POST', 'GET'])
+@app.route('/videoConvert/stopAll', methods=['POST', 'GET'])
 def stopAll():
     for rtsp_url in ffmpeg_processes:
         proc = ffmpeg_processes.__getitem__(rtsp_url)
@@ -213,7 +216,7 @@ def stop_stream(rtsp_url):
     return Response.__success__()
 
 
-@app.route('/<path:path>')
+@app.route('/videoConvert/<path:path>')
 def serve_files(path):
     if os.path.isfile(os.path.join(m3u8_directory, path)):
         return send_from_directory(m3u8_directory, path)
@@ -222,7 +225,7 @@ def serve_files(path):
         return Response.__fail__(msg=f"not found {path}")
 
 
-@app.route('/testCon', methods=["GET", "POST"])
+@app.route('/videoConvert/testCon', methods=["GET", "POST"])
 def testCon():
     return Response.__success__()
 
