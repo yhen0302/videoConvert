@@ -5,7 +5,7 @@
   "m3u8FileSavePath": "./video_convert",
   "pollingTimes": 400,
   "clearVideoIntervalTime": 200,
-  "hls_time": "1",
-  "hls_list_size": 8,
-  "g": "30"
+  "hls_time": "2",
+  "hls_list_size": "5",
+  "g": "10"
 }

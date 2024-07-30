@@ -72,8 +72,26 @@ def run_ffmpeg_command(rtsp_url, m3u8_file_path):
         "-g", str(g),
         "-hls_time", str(hls_time),
         "-hls_list_size", str(hls_list_size),
-        "-f", "hls", 
+        "-f", "rtsp", "rtsp_transport",
+        "tcp",
         m3u8_file_path 
+    ]
+
+    ffmpeg_command = [
+        "ffmpeg",
+        "-f",
+        "rtsp", "-rtsp_transport",
+        "tcp",
+        "-i",
+        rtsp_url,
+        "-c:v", "libx264",
+        "-vsync", "2",
+        "-c:a", "aac",
+        "-f", "hls",
+        "-hls_time", hls_time,
+        "-hls_list_size", hls_list_size,
+        "-g", g,
+        m3u8_file_path
     ]
 
 
